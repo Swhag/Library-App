@@ -36,6 +36,14 @@ class UI {
     document.querySelector("#author").value = "";
     document.querySelector("#status").value = "read";
   }
+
+  static changeStatus(el) {
+    if (el.innerHTML == "read") {
+      el.innerHTML = "not read";
+    } else {
+      el.innerHTML = "read";
+    }
+  }
 }
 
 // ---------------------------------------------------------------
@@ -96,14 +104,6 @@ document.querySelector("#book-list").addEventListener("click", (e) => {
     }
   }
   if (e.target.classList.contains("status-btn")) {
-    changeStatus(e.target);
+    UI.changeStatus(e.target);
   }
 });
-
-function changeStatus(el) {
-  if (el.innerHTML == "read") {
-    el.innerHTML = "not read";
-  } else {
-    el.innerHTML = "read";
-  }
-}
