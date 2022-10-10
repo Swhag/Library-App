@@ -1,4 +1,4 @@
-class Book {
+class Books {
   constructor(title, author, status) {
     this.title = title;
     this.author = author;
@@ -6,25 +6,24 @@ class Book {
   }
 }
 
-// UI class ------------------------------------------------------
+// UI -------------------------------------------------------------
 
 class UI {
   static displayBooks() {
-    const StoredBooks = [
+    const storedBooks = [
       {
         title: "Book One",
         author: "John Doe",
-        status: "Read",
+        status: "read",
       },
       {
-        title: "Book two",
+        title: "Book Two",
         author: "Jane Doe",
-        status: "Read",
+        status: "read",
       },
     ];
 
-    const books = StoredBooks;
-    books.forEach((book) => UI.addBookToList(book));
+    storedBooks.forEach((book) => this.addBookToList(book));
   }
   static addBookToList(book) {
     const list = document.querySelector("#book-list");
@@ -46,10 +45,10 @@ class UI {
     document.querySelector("#status").value = "read";
   }
 
-  static changeStatus(status) {
-    if (status.innerHTML == "read") {
-      status.innerHTML = "Not read";
-    } else status.innerHTML = "read";
+  static changeStatus(el) {
+    if (el.textContent == "read") {
+      el.textContent = "not read";
+    } else el.textContent = "read";
   }
 
   static deleteBook(el) {
@@ -61,7 +60,7 @@ class UI {
   }
 }
 
-// ---------------------------------------------------------------
+// ----------------------------------------------------------------
 
 (function loadLibrary() {
   document.addEventListener("DOMContentLoaded", UI.displayBooks());
@@ -72,50 +71,17 @@ class UI {
     const author = document.querySelector("#author").value;
     const status = document.querySelector("#status").value;
 
-    const newBook = new Book(title, author, status);
+    let newBook = new Books(title, author, status);
+
     UI.addBookToList(newBook);
     UI.clearField();
   });
-
   document.querySelector("#book-list").addEventListener("click", (e) => {
-    if (e.target.classList == "delete-btn") {
+    if (e.target.className == "delete-btn") {
       UI.deleteBook(e.target);
     }
-    if (e.target.classList == "status-btn") {
+    if (e.target.className == "status-btn") {
       UI.changeStatus(e.target);
     }
   });
 })();
-
-// Store class ---------------------------------------------------
-
-// class Store {
-//   static getBooks() {
-//     let books;
-//     if (localStorage.getItem("books") === null) {
-//       books = [];
-//     } else {
-//       books = JSON.parse(localStorage.getItem("books"));
-//     }
-
-//     return books;
-//   }
-
-//   static addBook(book) {
-//     const books = Store.getBooks();
-//     books.push(book);
-//     localStorage.setItem("books", JSON.stringify(books));
-//   }
-
-//   static removeBook(title) {
-//     const books = Store.getBooks();
-
-//     books.forEach((book, index) => {
-//       if (book.title === title) {
-//         books.splice(index, 1);
-//       }
-//     });
-
-//     localStorage.setItem("books", JSON.stringify(books));
-//   }
-// }
