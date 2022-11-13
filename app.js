@@ -15,8 +15,8 @@ class UI {
   }
 
   static addBook(book) {
-    const list = document.querySelector("#book-list");
-    const row = document.createElement("tr");
+    const list = document.querySelector('#book-list');
+    const row = document.createElement('tr');
 
     row.innerHTML = `
     <td>${book.title}</td>
@@ -29,20 +29,21 @@ class UI {
   }
 
   static clearField() {
-    document.querySelector("#title").value = "";
-    document.querySelector("#author").value = "";
-    document.querySelector("#status").value = "read";
+    document.querySelector('#title').value = '';
+    document.querySelector('#author').value = '';
+    document.querySelector('#status').value = 'read';
   }
 
   static changeStatus(status) {
-    if (status.innerHTML == "read") {
-      status.innerHTML = "Not read";
-    } else status.innerHTML = "read";
+    if (status.innerHTML == 'read') {
+      status.innerHTML = 'Not read';
+    } else status.innerHTML = 'read';
   }
 
   static deleteBook(bookRow, bookName) {
     if (confirm(`Delete ${bookName}?`)) {
-      bookRow.innerHTML = "";
+      Store.deleteBook(bookName);
+      bookRow.innerHTML = '';
     }
   }
 }
@@ -52,10 +53,10 @@ class UI {
 class Store {
   static getBooks() {
     let books;
-    if (localStorage.getItem("books") === null) {
+    if (localStorage.getItem('books') === null) {
       books = [];
     } else {
-      books = JSON.parse(localStorage.getItem("books"));
+      books = JSON.parse(localStorage.getItem('books'));
     }
 
     return books;
@@ -64,7 +65,7 @@ class Store {
   static addBook(book) {
     const books = Store.getBooks();
     books.push(book);
-    localStorage.setItem("books", JSON.stringify(books));
+    localStorage.setItem('books', JSON.stringify(books));
   }
 
   static findBook(bookName) {
@@ -83,12 +84,12 @@ class Store {
   static changeStatus(i) {
     const books = Store.getBooks();
 
-    if (books[i].status === "read") {
-      books[i].status = "not read";
-    } else if (books[i].status === "not read") {
-      books[i].status = "read";
+    if (books[i].status === 'read') {
+      books[i].status = 'not read';
+    } else if (books[i].status === 'not read') {
+      books[i].status = 'read';
     }
-    localStorage.setItem("books", JSON.stringify(books));
+    localStorage.setItem('books', JSON.stringify(books));
   }
 
   static deleteBook(bookName) {
@@ -100,7 +101,7 @@ class Store {
       }
     });
 
-    localStorage.setItem("books", JSON.stringify(books));
+    localStorage.setItem('books', JSON.stringify(books));
   }
 }
 
@@ -109,18 +110,18 @@ class Store {
 function loadDefaultBooks() {
   const DefaultBooks = [
     {
-      title: "Book One",
-      author: "John Doe",
-      status: "read",
+      title: 'Book One',
+      author: 'John Doe',
+      status: 'read',
     },
     {
-      title: "Book two",
-      author: "Jane Doe",
-      status: "read",
+      title: 'Book two',
+      author: 'Jane Doe',
+      status: 'read',
     },
   ];
 
-  if (localStorage.getItem("books") === null) {
+  if (localStorage.getItem('books') === null) {
     DefaultBooks.forEach((book) => Store.addBook(book));
   }
 }
@@ -129,16 +130,16 @@ function loadDefaultBooks() {
 
 (function loadLibrary() {
   document.addEventListener(
-    "DOMContentLoaded",
+    'DOMContentLoaded',
     loadDefaultBooks(),
     UI.displayBooks()
   );
-  document.querySelector("#library-form").addEventListener("submit", (e) => {
+  document.querySelector('#library-form').addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const title = document.querySelector("#title").value;
-    const author = document.querySelector("#author").value;
-    const status = document.querySelector("#status").value;
+    const title = document.querySelector('#title').value;
+    const author = document.querySelector('#author').value;
+    const status = document.querySelector('#status').value;
 
     const newBook = new Book(title, author, status);
 
@@ -147,15 +148,14 @@ function loadDefaultBooks() {
     UI.clearField();
   });
 
-  document.querySelector("#book-list").addEventListener("click", (e) => {
+  document.querySelector('#book-list').addEventListener('click', (e) => {
     let bookRow = e.target.parentElement.parentElement;
     let bookName = bookRow.firstElementChild.textContent;
 
-    if (e.target.classList == "delete-btn") {
-      Store.deleteBook(bookName);
+    if (e.target.classList == 'delete-btn') {
       UI.deleteBook(bookRow, bookName);
     }
-    if (e.target.classList == "status-btn") {
+    if (e.target.classList == 'status-btn') {
       Store.changeStatus(Store.findBook(bookName));
       UI.changeStatus(e.target);
     }
