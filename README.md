@@ -23,4 +23,4 @@ A simple book collection manager
 
 Click Here: [Live Demo](https://swhag.github.io/Library-App/) :point_left:
 
-![Capture1](https://user-images.githubusercontent.com/109196962/213099246-5715f936-9f64-4f0f-970a-e0b9ddb68f17.PNG)
+![Capture1](https://user-images.githubusercontent.com/109196962/213099305-a05cf9fc-44cb-4479-8caa-8cd98fd4e954.PNG)
