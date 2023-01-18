@@ -2,7 +2,18 @@
 
 ### Description
 
-A book collection manager, where you can add, remove, and update books.
+A simple book collection manager
+
+### Features
+
+- A form that allows user to add new books
+- Delete and change the read status of the book
+- Utilize Local Stoage to store book data as an Object
+
+### Frameworks
+
+- CSS Framework
+  - [Skeleton](http://getskeleton.com/)
 
 ## Built With
 
